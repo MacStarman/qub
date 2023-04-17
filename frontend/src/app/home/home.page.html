@@ -1,0 +1,18 @@
+<ion-header [translucent]="true" mode="md" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      Qube
+    </ion-title>
+    <div class="center">
+      <app-searchbar></app-searchbar>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-center">
+    <app-hotel-card (click)="navigateToHotelDetails(hotel)" *ngFor="let hotel of hotels" [hotel]="hotel">
+    </app-hotel-card>
+  </div>
+</ion-content>

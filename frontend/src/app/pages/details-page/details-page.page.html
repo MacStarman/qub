@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{hotel_details.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div>
+    <h1>{{ hotel_details.name }}</h1>
+    <p>{{ hotel_details.description }}</p>
+
+    <h2>Facilities</h2>
+    <ul>
+      <li *ngFor="let facility of hotel_details.facilities">{{ facility }}</li>
+    </ul>
+
+    <h2>Images</h2>
+    <!-- <div *ngFor="let image of hotel_details.images">
+      <img src="{{ image }}" alt="Hotel Image">
+    </div> -->
+    <c-carousel [interval]="0">
+
+      <c-carousel-inner>
+        <c-carousel-item *ngFor="let slide of slides">
+          <img
+            [src]="slide.src"
+            alt="{{slide.title}}"
+            class="d-block w-100"
+            loading="lazy"
+          />
+        </c-carousel-item>
+      </c-carousel-inner>
+      <div class="control-buttons">
+        <c-carousel-control routerLink caption="Previous" direction="prev"></c-carousel-control>
+        <c-carousel-control routerLink caption="Next" direction="next"></c-carousel-control>
+      </div>
+    </c-carousel>
+
+    <h2>Reviews</h2>
+      <div *ngFor="let review of hotel_details.reviews">
+        <ion-card>
+          <ion-card-content>
+            <ion-card-header>
+              <ion-grid no-padding style="width: 100%">
+                <ion-row>
+                  <ion-col>
+                    <ion-card-title>
+                      <h1 style="text-align: left; vertical-align: middle;">{{ review.name }}</h1>
+                    </ion-card-title>
+                  </ion-col>
+                  <ion-col style="flex-direction: row-reverse;">
+                    <app-star-rating style="text-align: right;" [rating]="review.stars"></app-star-rating>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-header>
+
+            <ion-card-subtitle style="padding: 16px;">
+              <p>{{ review.comment }}</p>
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+      </div>
+  </div>
+</ion-content>

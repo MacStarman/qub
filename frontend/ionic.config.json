@@ -1,0 +1,7 @@
+{
+  "name": "qube",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
