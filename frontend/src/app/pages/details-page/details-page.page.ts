@@ -10,7 +10,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxStarRatingModule } from 'ngx-star-rating';
 import { StarRatingComponent } from 'src/app/shared/star-rating/star-rating.component';
 
 

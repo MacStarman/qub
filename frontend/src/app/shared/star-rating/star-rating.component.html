@@ -1,3 +1,1 @@
-<form [formGroup]="form">
-  <ngx-star-rating [disabled]="true" formControlName="rating" [id]="'rating'"></ngx-star-rating>
-</form>
+<span *ngFor="let star of stars" class="star" [class.filled]="star <= rating">&#9733;</span>
