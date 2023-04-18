@@ -1,0 +1,6 @@
+service\controllers\RatingController.class
+service\ratings\Review.class
+service\ratings\Rating.class
+service\ratings\RatingRepository.class
+service\Application.class
+service\ratings\RatingService.class

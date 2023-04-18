@@ -1,0 +1,18 @@
+{
+    "id": "testHotel1",
+    "stars": 3.0,
+    "reviews": [
+        {
+            "hotelId": "testHotel1",
+            "reviewerName": "john",
+            "stars": 5.0,
+            "comment": "Very good"
+        },
+        {
+            "hotelId": "testHotel1",
+            "reviewerName": "jim",
+            "stars": 1.0,
+            "comment": "Very bad"
+        }
+    ]
+}
