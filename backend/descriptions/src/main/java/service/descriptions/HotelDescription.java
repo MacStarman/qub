@@ -1,4 +1,4 @@
-package main.java.service.descriptions;
+package service.descriptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
