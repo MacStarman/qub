@@ -1,0 +1,8 @@
+{
+  "BookingId": 0,
+  "hotelId": "Hotel1",
+  "customerName": "John",
+  "startDate": "21/3/2023",
+  "endDate": "5/4/2023",
+  "price": 600
+}

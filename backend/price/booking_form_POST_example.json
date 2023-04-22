@@ -1,0 +1,7 @@
+{
+  "hotelId" : "Hotel1",
+  "startDate" : "21/3/2023",
+  "endDate" : "5/4/2023",
+  "customerName" : "John",
+  "hotelPricePerDay": "40.00"
+}
