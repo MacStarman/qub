@@ -1,25 +1,42 @@
 <div class="bar">
   <div class="location">
     <p>Location</p>
-    <input type="text" placeholder="Where are you going?">
+    <input type="text" [(ngModel)]="location" placeholder="Where are you going?">
   </div>
   <div class="check-in">
         <p>Check in</p>
-    <input type="text" placeholder="Add dates">
+    <input type="date" placeholder="Add dates" [(ngModel)]="begin_date">
   </div>
   <div class="check-out">
-        <p>Check out</p>
-    <input type="text" placeholder="Add dates">
+    <p>Check out</p>
+    <input type="date" placeholder="Add dates" [(ngModel)]="end_date">
+        <!--
+        <ion-list>
+          <ion-item id="open-modal" class="datepicker">
+            <ion-label>Modal - Date selection</ion-label>
+            <ion-note slot="end">{{end_date }}</ion-note>
+          </ion-item>
+          <ion-modal trigger="open-modal" [cssClass]="'center'">
+            <ng-template>
+              <ion-datetime
+                presentation="date"
+                [(ngModel)]="end_date"
+                size="cover"
+                [showDefaultButtons]="true"
+              ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-list> -->
   </div>
   <div class="guests">
         <p>Guests</p>
-    <input type="text" placeholder="Add guests">
-    <span (click)="setOpen(true)"><ion-icon name="search-outline"></ion-icon></span>
+    <input type="number" placeholder="Add guests" [(ngModel)]="people">
+    <span (click)="setOpen(true); start_search()"><ion-icon name="search-outline"></ion-icon></span>
   </div>
 </div>
   <ion-toast
     [isOpen]="isToastOpen"
     message="Seach..."
-    [duration]="2000"
+    [duration]="1000"
     (didDismiss)="setOpen(false)"
   ></ion-toast>

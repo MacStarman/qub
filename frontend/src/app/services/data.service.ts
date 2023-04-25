@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Ihotel } from '../models/Ihotel';
 import { Ihotel_details } from '../models/Ihotel_details';
+import { IRequest } from '../models/IRequest';
 @Injectable({
   providedIn: 'root',
 })
@@ -55,6 +56,11 @@ export class DataService {
 
     return Promise.resolve(hotelDetails);
   }
+
+  search(search: IRequest): Boolean{
+    console.log("SENDING")
+    return true;
+  }
+
   constructor() {}
 }
-

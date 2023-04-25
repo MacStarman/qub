@@ -54,7 +54,42 @@ input[type="text"]{
   padding:0.2rem 0 0 0;
 }
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="date"]{
+  width: 110%;
+  border: none;
+  background-color: none;
+  background: none;
+}
+input[type="date"]:focus{
+  width: 110%;
+  outline: none !important;
+}
+
+.item-inner{
+  height: 20px;
+}
+input[type="number"]{
+  background:none;
+  border:none;
+  padding:0.2rem 0 0 0;
+}
+
 input[type="text"]:focus{
+  outline:none;
+}
+input[type="number"]:focus{
   outline:none;
 }
 
