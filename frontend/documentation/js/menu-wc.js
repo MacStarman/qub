@@ -24,8 +24,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                     <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>
                     <ul class="links">
                         <li class="link">
-                            <a href="index.html" data-type="chapter-link">
+                            <a href="overview.html" data-type="chapter-link">
                                 <span class="icon ion-ios-keypad"></span>Overview
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="index.html" data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>README
                             </a>
                         </li>
                                 <li class="link">
@@ -97,6 +102,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Ihotel_details.html" data-type="entity-link" >Ihotel_details</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/IRequest.html" data-type="entity-link" >IRequest</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Ireview.html" data-type="entity-link" >Ireview</a>
