@@ -19,16 +19,15 @@ public class DescriptionController {
 
     @Autowired
     DescriptionRepository descriptionRepo;
-
-    private HotelDescription hotelDescription;
-
-
-/*     @GetMapping(value="/descriptions", produces="application/json")
-    public ResponseEntity<ArrayList<String>>  descriptions() {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(descriptionRepo.findAll());
-    } */
+    @GetMapping(value = "/descriptions", produces = "application/json")
+    public ResponseEntity<ArrayList<String>> getDescriptions() {
+        ArrayList<String> list = new ArrayList<>();
+        for (HotelDescription description : descriptionRepo.findAll()) {
+            // temporary, will fix
+            list.add(description.getShortDescription());
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 
     @GetMapping(value = "/descriptions/{id}", produces = { "application/json" })
     public ResponseEntity<HotelDescription> getDescription(@PathVariable String id) {
