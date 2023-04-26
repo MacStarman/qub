@@ -1,33 +1,43 @@
 package service.descriptions;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+@Entity
+@Table(name = "descriptions")
 public class HotelDescription {
 
+    @Id
     private String id;
 
+    @Column(nullable = false, length = 45)
     private String shortDescription;
 
     public HotelDescription() {}
 
     // stored as URLs
+    @Column(nullable = false, unique = true, length = 30)
     private String thumbnail;
-    private ArrayList < String > images;
+    private String[] images;
 
+    @Column(nullable = false, unique = true, length = 30)
     private String location;
-    private ArrayList < String > longDescription;
-    private ArrayList < String > popularAttractions;
 
-    private ArrayList < String > facilities;
+    @Column(nullable = false, unique = true, length = 30)
+    private String longDescription;
+
+    private String[] popularAttractions;
+
+    private String[] facilities;
+
+    @Column(nullable = false, unique = true, length = 30)
     public String hotelLink;
 
-    // name of transport e.g. train followed by distance e.g. train station 200m from hotel.
-    private HashMap < String, String > publicTransportMap = new HashMap < String, String > ();
+    private String[] publicTransport;
 
-
-    public HotelDescription(String id, String shortDescription, String longDescription, String thumbnail, ArrayList < String > facilities,
-        ArrayList < String > popularAttractions, String hotelLink, ArrayList < String > images) {
+    public HotelDescription(String id, String shortDescription, String longDescription, String thumbnail, String[] facilities,
+        String[] popularAttractions, String hotelLink, String[] images) {
         this.id = id;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
@@ -59,23 +69,24 @@ public class HotelDescription {
         return longDescription;
     }
 
-    public ArrayList < String > getFacilities() {
+    public String[] getFacilities() {
         return facilities;
     }
 
-    public ArrayList < String > getPopularAttractions() {
+    public String[] getPopularAttractions() {
         return popularAttractions;
     }
 
-    public HashMap < String, String > getPublicTransportMap() {
-        return publicTransportMap;
+    public String[] getPublicTransport() {
+        return publicTransport;
     }
 
     public String getHotelLink() {
         return hotelLink;
     }
 
-    public ArrayList < String > getImages() {
+    public String[] getImages() {
         return images;
     }
+
 }

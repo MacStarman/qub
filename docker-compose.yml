@@ -1,0 +1,12 @@
+version: "3"
+services: 
+  mysqldb:
+    image: mysql:5.7
+    networks:
+      - hoteldescription-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=descriptions  
+
+networks:
+  hoteldescription-mysql: 
