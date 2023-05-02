@@ -11,7 +11,7 @@ cities: dublin, frankfurt, london
 - [ ] connect frontend to the backend
 - [ ] swagger to our services
 - [X] dockerize the gateway
-- [ ] dockerize the frontend
+- [X] dockerize the frontend ISSUE: Ports already in use frontend needs 80:80
 - [ ] SQL bug fix - descriptions
 - [ ] scalability?????
 
