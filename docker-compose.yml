@@ -1,10 +1,10 @@
-version: "3"
-services: 
+version: "3.8"
+
+services:
   mysqldb:
     image: mysql:5.7
     restart: unless-stopped
     env_file: ./.env
-    command: --init-file /data/application/init.sql
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
@@ -12,7 +12,6 @@ services:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
-      - ./backend/descriptions/src/main/resources/init-schema.sql:/data/application/init.sql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: pma
@@ -25,11 +24,13 @@ services:
     restart: always
     ports:
       - 8081:80
+
   descriptions:
     depends_on:
       - mysqldb
-    build: backend/descriptions  
-    env_file: ./.env
+    build: backend/descriptions
+    restart: on-failure
+    env_file: .env
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
@@ -38,12 +39,16 @@ services:
         "spring.datasource.username" : "$MYSQLDB_USER",
         "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update",
-        "spring.jpa.hibernate.naming-strategy" : "org.hibernate.cfg.EJB3NamingStrategy"
-        }'   
+        "spring.jpa.hibernate.ddl-auto" : "update"
+        }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
   ratings:
     build: backend/ratings
     ports:
       - 8080:8080
+
 volumes:
   db:
