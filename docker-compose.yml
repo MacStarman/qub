@@ -41,5 +41,9 @@ services:
         "spring.jpa.hibernate.ddl-auto" : "update",
         "spring.jpa.hibernate.naming-strategy" : "org.hibernate.cfg.EJB3NamingStrategy"
         }'   
+  ratings:
+    build: backend/ratings
+    ports:
+      - 8080:8080
 volumes:
   db:
