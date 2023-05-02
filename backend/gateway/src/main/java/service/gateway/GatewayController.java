@@ -100,7 +100,27 @@ public class GatewayController {
 
     @PostMapping("/hotel/{id}/details")
     public ResponseEntity<HotelDetails> getDetails(@PathVariable Integer id){
-        return ResponseEntity.ok().build();
+
+        String description_servie_url = getServices().get("description");
+        ResponseEntity<HotelDescription> description_response = getHotelDescription(description_servie_url, id);
+        String price_servie_url = getServices().get("price");
+        ResponseEntity<PriceResponse> price_response = getPrice(price_servie_url, id);
+        String rating_servie_url = getServices().get("rating");
+        ResponseEntity<Rating> raiting_response = getRating(rating_servie_url, id);
+        HotelDetails details = new HotelDetails(raiting_response.getBody(),description_response.getBody(),price_response.getBody());
+        return ResponseEntity.ok().body(details);
+    }
+
+    private ResponseEntity<HotelDescription> getHotelDescription(String descriptionServieUrl, Integer id) {
+        return null;
+    }
+
+    private ResponseEntity<Rating> getRating(String ratingServieUrl, Integer id) {
+        return null;
+    }
+
+    private ResponseEntity<PriceResponse> getPrice(String priceServieUrl, Integer id) {
+        return null;
     }
 
 //    @GetMapping(value = "/applications/{id}", produces = "application/json")
