@@ -10,7 +10,7 @@ cities: dublin, frankfurt, london
 - [X] Gateway: details endpoint
 - [ ] connect frontend to the backend
 - [ ] swagger to our services
-- [ ] dockerize the gateway
+- [X] dockerize the gateway
 - [ ] dockerize the frontend
 - [ ] SQL bug fix - descriptions
 - [ ] scalability?????
