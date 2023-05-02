@@ -29,7 +29,7 @@ public class HotelDescription implements Serializable  {
     private String[] images;
 
     @Column(nullable = false, unique = true, length = 30)
-    private String location;
+    private String hotelLocation;
 
     @Column(nullable = false, unique = true, length = 30)
     private String longDescription;
@@ -66,8 +66,8 @@ public class HotelDescription implements Serializable  {
         return id;
     }
 
-    public String getLocation() {
-        return location;
+    public String getHotelLocation() {
+        return hotelLocation;
     }
 
     public String getShortDescription() {
