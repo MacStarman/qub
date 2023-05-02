@@ -1,0 +1,4 @@
+service/controllers/DescriptionController.class
+service/descriptions/HotelDescription.class
+service/Application.class
+service/descriptions/DescriptionRepository.class
