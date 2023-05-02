@@ -56,6 +56,12 @@ services:
     container_name: frontend
     ports:
       - 80:80
+  gateway:
+    build: backend/gateway
+    container_name: gateway
+    hostname: qub
+    ports:
+      - 8085:8085
 
 volumes:
   db:
