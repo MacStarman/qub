@@ -7,7 +7,7 @@ cities: dublin, frankfurt, london
 
 # TODO (till thurday):
 - [ ] Regestry services at the gateways (you can edit the gateway code) Decision: Netflix Eureka 
-- [ ] Gateway: details endpoint
+- [X] Gateway: details endpoint
 - [ ] connect frontend to the backend
 - [ ] swagger to our services
 - [ ] dockerize the gateway
