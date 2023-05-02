@@ -1,6 +1,23 @@
 # Qub
 
+# Rules
+Example data
+id: hotel1,hotel2,hotel3,hotel4,hotel5,...
+cities: dublin, frankfurt, london
 
+# TODO (till thurday):
+- [ ] Regestry services at the gateways (you can edit the gateway code) Decision: Netflix Eureka 
+- [ ] Gateway: details endpoint
+- [ ] connect frontend to the backend
+- [ ] swagger to our services
+- [ ] dockerize the gateway
+- [ ] dockerize the frontend
+- [ ] SQL bug fix - descriptions
+- [ ] scalability?????
+
+## Definition of Done
+Services: Dockercompose finished. -> everything is setup and ready to fetch data
+Gateway: Works
 
 ## Getting started
 
