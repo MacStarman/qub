@@ -47,36 +47,56 @@ public class GatewayController {
         RestTemplate template = new RestTemplate();
         ResponseEntity<PriceResponse[]> response = template.postForEntity(url, request, PriceResponse[].class);
         if (response.getStatusCode().equals(HttpStatus.OK)) {
-            System.out.println(Objects.requireNonNull(response.getBody()).length + " hotels found");
+            System.out.println(Objects.requireNonNull(response.getBody()).length + " prices found");
         }
         if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)){
-            System.out.println("no hotels found for this time or location");
+            System.out.println("no price found for this time or location");
+        }
+        return response;
+    }
+    private ResponseEntity<Rating[]> getRating(String url, BookingForm request) {
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<Rating[]> response = template.postForEntity(url, request, Rating[].class);
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            System.out.println(Objects.requireNonNull(response.getBody()).length + " raitings found");
+        }
+        if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)){
+            System.out.println("no ratings found for this time or location");
         }
         return response;
     }
 
-    @PostMapping(value ="/hotels", consumes = "application/json")
+    @PostMapping(value ="/hotels", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Hotel[]> getHotels(@RequestBody BookingForm request){
         String description_servie_url = getServices().get("description");
         ResponseEntity<HotelDescription[]> description_response = getHotelDescription(description_servie_url, request);
         String price_servie_url = getServices().get("price");
         ResponseEntity<PriceResponse[]> price_response = getPrice(price_servie_url, request);
+        String rating_servie_url = getServices().get("rating");
+        ResponseEntity<Rating[]> raiting_response = getRating(rating_servie_url, request);
 
         ArrayList<Hotel> hotel_list = new ArrayList<>();
         HotelDescription[] descriptions = description_response.getBody();
         PriceResponse[] price = price_response.getBody();
         HashMap<String,PriceResponse> price_map = new HashMap<>();
+        HashMap<String,Rating> rating_list = new HashMap<>();
         for (PriceResponse item : price) {
             price_map.put(item.getHotelId(),item);
         }
         assert descriptions != null;
+        for (Rating item: Objects.requireNonNull(raiting_response.getBody())) {
+            rating_list.put(item.getId(),item);
+        }
         for (HotelDescription description : descriptions) {
             PriceResponse l_price = price_map.get(description.getId());
-            hotel_list.add(new Hotel(description.getId(),l_price, 5, description));
+            Rating l_raiting = rating_list.get(description.getId());
+            hotel_list.add(new Hotel(description.getId(),l_price, l_raiting, description));
         }
         Hotel[] hotelArray = hotel_list.toArray(new Hotel[hotel_list.size()]);
         return ResponseEntity.status(HttpStatus.OK).body(hotelArray);
     }
+
+
 
     @PostMapping("/hotel/{id}/details")
     public ResponseEntity<HotelDetails> getDetails(@PathVariable Integer id){

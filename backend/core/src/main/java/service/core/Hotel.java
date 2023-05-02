@@ -3,10 +3,10 @@ package service.core;
 public class Hotel {
     private String id;
     private PriceResponse price;
-    private int rating;
+    private Rating rating;
     private HotelDescription description;
 
-    public Hotel(String id, PriceResponse price, int rating, HotelDescription description) {
+    public Hotel(String id, PriceResponse price, Rating rating, HotelDescription description) {
         this.id = id;
         this.price = price;
         this.rating = rating;
@@ -31,11 +31,11 @@ public class Hotel {
         this.price = price;
     }
 
-    public int getRating() {
+    public Rating getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 
