@@ -12,7 +12,7 @@ cities: dublin, frankfurt, london
 - [ ] swagger to our services
 - [X] dockerize the gateway
 - [X] dockerize the frontend ISSUE: Ports already in use frontend needs 80:80
-- [ ] SQL bug fix - descriptions
+- [X] SQL bug fix - descriptions
 - [ ] scalability?????
 
 ## Definition of Done
