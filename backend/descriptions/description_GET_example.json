@@ -1,0 +1,26 @@
+[
+    {
+      "id": "hotel1",
+      "shortDescription": "Budget hotel in the heart of Dublin City.",
+      "thumbnail": "https://media-cdn.tripadvisor.com/media/photo-s/12/98/ee/42/mespil-hotel.jpg",
+      "images": [
+        "https://www.mespilhotel.com/cmsGallery/imagerow/7839/resized/1200x1200/the_lounge_ab.jpg",
+        "https://www.mespilhotel.com/cmsGallery/imagerow/7839/resized/1200x1200/gym_ds_door.jpg"
+      ],
+      "hotelLocation": "Dublin",
+      "longDescription": "We charge you €200 a night for a basic hotel experience.",
+      "popularAttractions": [
+        "The Spire",
+        "Guinness Storehouse"
+      ],
+      "facilities": [
+        "24 hr reception",
+        "GYM"
+      ],
+      "hotelLink": "http://dublinhotel.com",
+      "publicTransport": [
+        "Train",
+        "Bus"
+      ]
+    }
+  ]

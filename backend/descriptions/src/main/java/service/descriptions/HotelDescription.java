@@ -1,5 +1,7 @@
 package service.descriptions;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -21,36 +23,32 @@ public class HotelDescription implements Serializable  {
     public HotelDescription() {}
 
     // stored as URLs
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, unique = true, length = 200)
     private String thumbnail;
 
-    @ElementCollection(targetClass=String.class)
-    @OrderColumn(name = "pos")
-    private String[] images;
+    @ElementCollection
+    private List<String> images = new ArrayList<String>();;
 
     @Column(nullable = false, unique = true, length = 30)
     private String hotelLocation;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, unique = true, length = 100)
     private String longDescription;
 
-    @ElementCollection(targetClass=String.class)
-    @OrderColumn(name = "pos")
-    private String[] popularAttractions;
+    @ElementCollection
+    private List<String> popularAttractions = new ArrayList<String>();
 
-    @ElementCollection(targetClass=String.class)
-    @OrderColumn(name = "pos")
-    private String[] facilities;
+    @ElementCollection
+    private List<String> facilities = new ArrayList<String>();
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, unique = true, length = 50)
     public String hotelLink;
 
-    @ElementCollection(targetClass=String.class)
-    @OrderColumn(name = "pos")
-    private String[] publicTransport;
+    @ElementCollection
+    private List<String> publicTransport = new ArrayList<String>();
 
-    public HotelDescription(String id, String shortDescription, String longDescription, String thumbnail, String[] facilities,
-        String[] popularAttractions, String hotelLink, String[] images) {
+    public HotelDescription(String id, String shortDescription, String longDescription, String thumbnail, List<String> facilities,
+    List<String> popularAttractions, String hotelLink, List<String> images, List<String> publicTransport) {
         this.id = id;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
@@ -59,6 +57,7 @@ public class HotelDescription implements Serializable  {
         this.popularAttractions = popularAttractions;
         this.hotelLink = hotelLink;
         this.images = images;
+        this.publicTransport = publicTransport;
 
     }
 
@@ -82,15 +81,15 @@ public class HotelDescription implements Serializable  {
         return longDescription;
     }
 
-    public String[] getFacilities() {
+    public List<String> getFacilities() {
         return facilities;
     }
 
-    public String[] getPopularAttractions() {
+    public List<String> getPopularAttractions() {
         return popularAttractions;
     }
 
-    public String[] getPublicTransport() {
+    public List<String> getPublicTransport() {
         return publicTransport;
     }
 
@@ -98,7 +97,7 @@ public class HotelDescription implements Serializable  {
         return hotelLink;
     }
 
-    public String[] getImages() {
+    public List<String> getImages() {
         return images;
     }
 
