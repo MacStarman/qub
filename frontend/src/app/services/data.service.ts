@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import { Ihotel } from '../models/Ihotel';
 import { Ihotel_details } from '../models/Ihotel_details';
 import { IRequest } from '../models/IRequest';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+
+  rootURL = '/api';
+
   gethotels(): Promise<Ihotel[]> {
     const hotels: Ihotel[] = [
       {
@@ -29,7 +34,7 @@ export class DataService {
         rating: 3,
       },
     ];
-
+    // return this.http.get(this.rootURL + '/users');
     return Promise.resolve(hotels);
   }
 
@@ -62,5 +67,5 @@ export class DataService {
     return true;
   }
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 }
