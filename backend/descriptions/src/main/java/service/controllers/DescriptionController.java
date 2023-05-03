@@ -20,11 +20,10 @@ public class DescriptionController {
     @Autowired
     DescriptionRepository descriptionRepo;
     @GetMapping(value = "/descriptions", produces = "application/json")
-    public ResponseEntity<ArrayList<String>> getDescriptions() {
-        ArrayList<String> list = new ArrayList<>();
+    public ResponseEntity<ArrayList<HotelDescription>> getDescriptions() {
+        ArrayList<HotelDescription> list = new ArrayList<>();
         for (HotelDescription description : descriptionRepo.findAll()) {
-            // temporary, will fix
-            list.add(description.getShortDescription());
+            list.add(description);
         }
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
