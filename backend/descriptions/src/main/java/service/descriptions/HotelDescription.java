@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +15,9 @@ public class HotelDescription implements Serializable  {
 
     @Id
     private String id;
+
+    @Column(nullable = false, length = 30)
+    private String hotelName;
 
     @Column(nullable = false, length = 45)
     private String shortDescription;
@@ -47,9 +49,10 @@ public class HotelDescription implements Serializable  {
     @ElementCollection
     private List<String> publicTransport = new ArrayList<String>();
 
-    public HotelDescription(String id, String shortDescription, String longDescription, String thumbnail, List<String> facilities,
+    public HotelDescription(String id, String hotelName, String shortDescription, String longDescription, String thumbnail, List<String> facilities,
     List<String> popularAttractions, String hotelLink, List<String> images, List<String> publicTransport) {
         this.id = id;
+        this.hotelName = hotelName;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.thumbnail = thumbnail;
@@ -63,6 +66,10 @@ public class HotelDescription implements Serializable  {
 
     public String getId() {
         return id;
+    }
+
+    public String getHotelName() {
+        return hotelName;
     }
 
     public String getHotelLocation() {

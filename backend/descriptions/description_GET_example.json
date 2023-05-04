@@ -1,6 +1,7 @@
 [
     {
       "id": "hotel1",
+      "hotelName": "Mespil Hotel",
       "shortDescription": "Budget hotel in the heart of Dublin City.",
       "thumbnail": "https://media-cdn.tripadvisor.com/media/photo-s/12/98/ee/42/mespil-hotel.jpg",
       "images": [

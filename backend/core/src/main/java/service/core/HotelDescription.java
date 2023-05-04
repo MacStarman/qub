@@ -1,30 +1,40 @@
 package service.core;
 
-public class HotelDescription {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class HotelDescription implements Serializable  {
 
     private String id;
+
+    private String hotelName;
+
     private String shortDescription;
 
     public HotelDescription() {}
 
     private String thumbnail;
-    private String[] images;
 
-    private String location;
+    private List<String> images = new ArrayList<String>();;
+
+    private String hotelLocation;
 
     private String longDescription;
 
-    private String[] popularAttractions;
+    private List<String> popularAttractions = new ArrayList<String>();
 
-    private String[] facilities;
+
+    private List<String> facilities = new ArrayList<String>();
 
     public String hotelLink;
 
-    private String[] publicTransport;
+    private List<String> publicTransport = new ArrayList<String>();
 
-    public HotelDescription(String id, String shortDescription, String longDescription, String thumbnail, String[] facilities,
-                            String[] popularAttractions, String hotelLink, String[] images) {
+    public HotelDescription(String id, String hotelName, String shortDescription, String longDescription, String thumbnail, List<String> facilities,
+    List<String> popularAttractions, String hotelLink, List<String> images, List<String> publicTransport) {
         this.id = id;
+        this.hotelName = hotelName;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.thumbnail = thumbnail;
@@ -32,6 +42,7 @@ public class HotelDescription {
         this.popularAttractions = popularAttractions;
         this.hotelLink = hotelLink;
         this.images = images;
+        this.publicTransport = publicTransport;
 
     }
 
@@ -39,8 +50,12 @@ public class HotelDescription {
         return id;
     }
 
-    public String getLocation() {
-        return location;
+    public String getHotelName() {
+        return hotelName;
+    }
+    
+    public String getHotelLocation() {
+        return hotelLocation;
     }
 
     public String getShortDescription() {
@@ -55,15 +70,15 @@ public class HotelDescription {
         return longDescription;
     }
 
-    public String[] getFacilities() {
+    public List<String> getFacilities() {
         return facilities;
     }
 
-    public String[] getPopularAttractions() {
+    public List<String> getPopularAttractions() {
         return popularAttractions;
     }
 
-    public String[] getPublicTransport() {
+    public List<String> getPublicTransport() {
         return publicTransport;
     }
 
@@ -71,7 +86,7 @@ public class HotelDescription {
         return hotelLink;
     }
 
-    public String[] getImages() {
+    public List<String> getImages() {
         return images;
     }
 
