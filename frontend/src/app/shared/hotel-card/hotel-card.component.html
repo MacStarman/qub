@@ -1,20 +1,20 @@
 <ion-card class="hotel-card">
   <ion-card-header>
-    <ion-card-title>{{hotel.price.hotelId}}</ion-card-title>
-    <ion-card-subtitle>{{hotel.description.shortDescription}}</ion-card-subtitle>
+    <ion-card-title>{{hotel.name}}</ion-card-title>
+    <ion-card-subtitle>{{hotel.short_description}}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
     <div class="hotel-content">
       <div class="hotel-info">
         <div class="rating">
           <h3>Rating: </h3>
-          <app-star-rating [rating]="hotel.rating.stars"></app-star-rating>
+          <app-star-rating [rating]="hotel.rating"></app-star-rating>
         </div>
         <div class="price">
-          <h2 class="hotel-price">{{hotel.price.price}} €</h2>
+          <h2 class="hotel-price">{{hotel.price}} €</h2>
         </div>
       </div>
     </div>
-    <img src={{hotel.description.thumbnail}} alt="hotel thumbnail">
+    <img src={{hotel.thumbnail}} alt="hotel thumbnail">
   </ion-card-content>
 </ion-card>
