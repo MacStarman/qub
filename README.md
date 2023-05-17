@@ -9,12 +9,12 @@ cities: dublin, frankfurt, london
 - [ ] Regestry services at the gateways (you can edit the gateway code) Decision: Netflix Eureka 
 - [X] Gateway: details endpoint
 - [ ] connect frontend to the backend
-- [ ] swagger to our services
+- [X] swagger to our services
 - [X] dockerize the gateway
 - [X] dockerize the frontend ISSUE: Ports already in use frontend needs 80:80
 - [X] SQL bug fix - descriptions
 - [ ] scalability?????
-
+- [ ] faut taulence
 ## Definition of Done
 Services: Dockercompose finished. -> everything is setup and ready to fetch data
 Gateway: Works
