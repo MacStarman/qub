@@ -23,7 +23,7 @@ services:
       PMA_ARBITRARY: 1
     restart: always
     ports:
-      - 8081:81
+      - 8086:81
 
   descriptions:
     depends_on:
@@ -39,7 +39,7 @@ services:
         "spring.datasource.username" : "$MYSQLDB_USER",
         "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "create-drop",
+        "spring.jpa.hibernate.ddl-auto" : "update",
         "spring.sql.init.mode" : "always" ,
         "spring.datasource.initialization-mode" : "always"
         }'
