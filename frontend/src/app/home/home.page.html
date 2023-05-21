@@ -4,15 +4,18 @@
       Qube
     </ion-title>
     <div class="center">
-      <app-searchbar></app-searchbar>
+      <app-searchbar (searchTriggered)="handleSearchTriggered()"></app-searchbar>
     </div>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="ion-center">
+  <div class="ion-center" *ngIf="show">
     <app-hotel-card (click)="navigateToHotelDetails(hotel)" *ngFor="let hotel of hotels" [hotel]="hotel">
     </app-hotel-card>
+  </div>
+  <div class="ion-center" *ngIf="show===false">
+    <p style="text-align: center; margin-top: 10rem; color: #676767;">no hotels. use the search...</p>
   </div>
 </ion-content>

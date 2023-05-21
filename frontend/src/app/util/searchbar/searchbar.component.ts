@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonDatetime, IonicModule } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
@@ -12,6 +12,15 @@ import { IRequest } from 'src/app/models/IRequest'
   imports: [IonicModule, FormsModule],
 })
 export class SearchbarComponent implements OnInit {
+  @Output() searchTriggered: EventEmitter<void> = new EventEmitter<void>();
+
+  performSearch(): void {
+    // Perform search logic...
+
+    // Emit the event to notify the parent component
+    this.searchTriggered.emit();
+  }
+
   isToastOpen = false;
   location!: string;
   begin_date!: Date;

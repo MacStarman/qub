@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Ihotel } from '../models/Ihotel';
 import { Ihotel_details } from '../models/Ihotel_details';
 import { IRequest } from '../models/IRequest';
-import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +16,11 @@ export class DataService {
       {
         id: 1,
         name: 'My Hotel',
-        location: 'New York',
+        location: 'Paris',
         thumbnail:
           'https://digital.ihg.com/is/image/ihg/voco-new-york-6671510166-16x9',
         price: 120.2,
-        short_description: 'A cozy hotel in the heart of New York',
+        short_description: 'A cozy hotel in the heart of Paris',
         rating: 4,
       },
       {
@@ -28,7 +28,7 @@ export class DataService {
         name: 'Another Hotel',
         location: 'Paris',
         thumbnail:
-          'https://digital.ihg.com/is/image/ihg/voco-new-york-6671510166-16x9',
+          'https://www.cordelia-paris-hotel.com/images_hotel_cordelia_paris/home/hotel-cordelia-paris-1.jpg',
         price: 150,
         short_description: 'A luxurious hotel in the heart of Paris',
         rating: 3,
@@ -67,5 +67,5 @@ export class DataService {
     return true;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 }
