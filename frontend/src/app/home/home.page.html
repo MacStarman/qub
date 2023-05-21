@@ -4,7 +4,7 @@
       Qube
     </ion-title>
     <div class="center">
-      <app-searchbar (searchTriggered)="handleSearchTriggered()"></app-searchbar>
+      <app-searchbar (requestSent)="handleRequest($event)"></app-searchbar>
     </div>
 
   </ion-toolbar>
