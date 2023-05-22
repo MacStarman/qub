@@ -19,7 +19,7 @@ public class PriceService{
      * additional 10% discount for males over 60
      */
 
-    public double computePrice(BookingForm bookingForm) {
+    public double computePrice(BookingDetails bookingForm) {
         String[] startSplit = bookingForm.startDate.split("/");
         int startDay = Integer.parseInt(startSplit[0]);
         int startMonth = Integer.parseInt(startSplit[1]);
@@ -43,8 +43,6 @@ public class PriceService{
                     startMonthInDays += 30;
                     break;
             }
-
-            System.out.println("Start Month: " + startMonthInDays);
         }
 
         for(int i = 1; i < endMonth; i++){
@@ -59,8 +57,6 @@ public class PriceService{
                     endMonthInDays += 30;
                     break;
             }
-
-            System.out.println("End Month: " + endMonthInDays);
         }
 
         int startInDays = startYear*365 + startYear/4 + startMonthInDays + startDay;
@@ -68,6 +64,6 @@ public class PriceService{
 
         int bookedDays = endInDays - startInDays;
 
-        return bookingForm.hotelPricePerDay * bookedDays;
+        return bookingForm.hotelPricePerDay * bookingForm.guestCount * bookedDays;
     }
 }

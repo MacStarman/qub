@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.Booking;
-import service.BookingForm;
-import service.BookingRepository;
-import service.PriceService;
+import service.*;
+import service.core.Booking;
+import service.core.PriceResponse;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -18,6 +17,9 @@ import java.util.Collection;
 public class PriceController {
     @Autowired
     BookingRepository bookings;
+
+    @Autowired
+    PriceResponseRepository prices;
     private PriceService service = new PriceService();
 
     @Value("${server.port}")
@@ -39,11 +41,20 @@ public class PriceController {
 
         return ResponseEntity.status(HttpStatus.OK).body(booking);
     }
+    
+    @GetMapping(value="/price/{price}/{startDate}/{endDate}/{guests}", produces={"application/json"})
+    public ResponseEntity<Double> calculatePrice(@PathVariable double price,
+    												@PathVariable String startDate,
+    												@PathVariable String endDate,
+    												@PathVariable int guests) {
+    	double fullPrice = service.computePrice(new BookingDetails(startDate, endDate, price, guests));
+    	return ResponseEntity.status(HttpStatus.OK).body(fullPrice);
+    }
 
     @PostMapping(value="/bookings", consumes="application/json")
     public ResponseEntity<Booking> book(
             @RequestBody BookingForm bookingForm) {
-        double fullPrice = service.computePrice(bookingForm);
+        double fullPrice = 20;
         Booking booking = new Booking(bookings.count(), bookingForm.hotelId, bookingForm.customerName, bookingForm.startDate, bookingForm.endDate, fullPrice);
         bookings.insert(booking);
 
@@ -55,6 +66,16 @@ public class PriceController {
                 .header("Location", url)
                 .header("Content-Location", url)
                 .body(booking);
+    }
+
+    @PostMapping(value="/price", consumes="application/json")
+    public ResponseEntity<PriceResponse> makePrice(
+            @RequestBody PriceResponse priceResponse) {
+        prices.insert(priceResponse);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(priceResponse);
     }
 
     private String getHost() {

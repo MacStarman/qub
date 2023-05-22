@@ -90,7 +90,7 @@ public class GatewayController {
         for (HotelDescription description : descriptions) {
             PriceResponse l_price = price_map.get(description.getId());
             Rating l_raiting = rating_list.get(description.getId());
-            hotel_list.add(new Hotel(description.getId(),l_price, l_raiting, description));
+            hotel_list.add(new Hotel(description.getId(),l_price.getPrice(), l_raiting, description));
         }
         Hotel[] hotelArray = hotel_list.toArray(new Hotel[hotel_list.size()]);
         return ResponseEntity.status(HttpStatus.OK).body(hotelArray);
@@ -99,7 +99,7 @@ public class GatewayController {
 
 
     @PostMapping("/hotel/{id}/details")
-    public ResponseEntity<HotelDetails> getDetails(@PathVariable Integer id){
+    public ResponseEntity<HotelDetails> getDetails(@PathVariable Integer id) {
 
         String description_servie_url = getServices().get("description");
         ResponseEntity<HotelDescription> description_response = getHotelDescription(description_servie_url, id);
@@ -107,7 +107,7 @@ public class GatewayController {
         ResponseEntity<PriceResponse> price_response = getPrice(price_servie_url, id);
         String rating_servie_url = getServices().get("rating");
         ResponseEntity<Rating> raiting_response = getRating(rating_servie_url, id);
-        HotelDetails details = new HotelDetails(raiting_response.getBody(),description_response.getBody(),price_response.getBody());
+        HotelDetails details = new HotelDetails(raiting_response.getBody(), description_response.getBody(), price_response.getBody());
         return ResponseEntity.ok().body(details);
     }
 
@@ -119,7 +119,7 @@ public class GatewayController {
         return null;
     }
 
-    private ResponseEntity<PriceResponse> getPrice(String priceServieUrl, Integer id) {
+    private ResponseEntity<PriceResponse> getPrice(String priceServieUrl, int id) {
         return null;
     }
 
