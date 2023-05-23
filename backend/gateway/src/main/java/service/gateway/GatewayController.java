@@ -29,7 +29,16 @@ public class GatewayController {
 
     @GetMapping("/services")
     public HashMap<String,String> getServices() {
-        services.put("price", "http://localhost:8081/price");
+
+        if(services.put("price", "http://localhost:8081/price") == null){
+            System.out.println("price failed!!!!!");
+        }
+        if(services.put("ratings", "http://localhost:8080/ratings") == null){
+            System.out.println("ratings failed!!!!!");
+        }
+        if(services.put("descriptions", "http://localhost:8080/descriptions") == null){
+            System.out.println("descriptions failed!!!!!");
+        }
         return services;
     }
 
@@ -71,11 +80,11 @@ public class GatewayController {
 
     @PostMapping(value ="/hotels", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Hotel[]> getHotels(@RequestBody BookingForm request){
-        String description_servie_url = getServices().get("description");
+        String description_servie_url = getServices().get("descriptions");
         ResponseEntity<HotelDescription[]> description_response = getHotelDescription(description_servie_url, request);
         String price_servie_url = getServices().get("price");
         ResponseEntity<PriceResponse[]> price_response = getPrice(price_servie_url, request);
-        String rating_servie_url = getServices().get("rating");
+        String rating_servie_url = getServices().get("ratings");
         ResponseEntity<Rating[]> raiting_response = getRating(rating_servie_url, request);
 
         ArrayList<Hotel> hotel_list = new ArrayList<>();
@@ -102,7 +111,7 @@ public class GatewayController {
 
 
     @PostMapping("/hotel/{id}/details")
-    public ResponseEntity<HotelDetails> getDetails(@PathVariable Integer id) {
+    public ResponseEntity<HotelDetails> getDetails(@PathVariable String id) {
 
         String description_servie_url = getServices().get("description");
         ResponseEntity<HotelDescription> description_response = getHotelDescription(description_servie_url, id);
@@ -114,15 +123,15 @@ public class GatewayController {
         return ResponseEntity.ok().body(details);
     }
 
-    private ResponseEntity<HotelDescription> getHotelDescription(String descriptionServieUrl, Integer id) {
+    private ResponseEntity<HotelDescription> getHotelDescription(String descriptionServieUrl, String id) {
         return null;
     }
 
-    private ResponseEntity<Rating> getRating(String ratingServieUrl, Integer id) {
+    private ResponseEntity<Rating> getRating(String ratingServieUrl, String id) {
         return null;
     }
 
-    private ResponseEntity<PriceResponse> getPrice(String priceServieUrl, int id) {
+    private ResponseEntity<PriceResponse> getPrice(String priceServieUrl, String id) {
         return null;
     }
 
