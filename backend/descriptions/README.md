@@ -10,4 +10,4 @@ In the project's root directory, use Docker to launch all neccessary containers 
 docker compose up --build
 ```
 
-By default Port 6868 is used for the descriptions container.
+By default Port 8083 is used for the descriptions container.

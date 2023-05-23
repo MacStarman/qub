@@ -36,7 +36,7 @@ public class GatewayController {
         if(services.put("ratings", "http://localhost:8080/ratings") == null){
             System.out.println("ratings failed!!!!!");
         }
-        if(services.put("descriptions", "http://localhost:6868/descriptions") == null){
+        if(services.put("descriptions", "http://localhost:8083/descriptions") == null){
             System.out.println("descriptions failed!!!!!");
         }
         return services;
