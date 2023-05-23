@@ -113,7 +113,7 @@ public class GatewayController {
     @PostMapping("/hotel/{id}/details")
     public ResponseEntity<HotelDetails> getDetails(@PathVariable String id) {
 
-        String description_servie_url = getServices().get("description");
+        String description_servie_url = getServices().get("descriptions");
         ResponseEntity<HotelDescription> description_response = getHotelDescription(description_servie_url, id);
         String price_servie_url = getServices().get("price");
         ResponseEntity<PriceResponse> price_response = getPrice(price_servie_url, id);
