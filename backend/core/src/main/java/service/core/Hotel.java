@@ -2,11 +2,11 @@ package service.core;
 
 public class Hotel {
     private String id;
-    private double price;
+    private PriceResponse price;
     private Rating rating;
     private HotelDescription description;
 
-    public Hotel(String id, double price, Rating rating, HotelDescription description) {
+    public Hotel(String id, PriceResponse price, Rating rating, HotelDescription description) {
         this.id = id;
         this.price = price;
         this.rating = rating;
@@ -23,11 +23,11 @@ public class Hotel {
         this.id = id;
     }
 
-    public double getPrice() {
+    public PriceResponse getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(PriceResponse price) {
         this.price = price;
     }
 

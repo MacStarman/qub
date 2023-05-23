@@ -1,8 +1,10 @@
 package service.core;
 
+import java.util.Date;
+
 public class BookingForm {
     public String location;
-    public String startDate;
-    public String endDate;
+    public Date startDate;
+    public Date endDate;
     public int persons;
 }

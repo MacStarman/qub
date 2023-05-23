@@ -1,0 +1,3 @@
+service\HotelPriceRepository.class
+service\HotelPrice.class
+service\Booking.class

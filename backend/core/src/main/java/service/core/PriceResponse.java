@@ -1,17 +1,17 @@
 package service.core;
 
+import java.util.Date;
+
 public class PriceResponse {
-    private int BookingId;
     private String hotelId;
 
-    private String startDate;
+    private Date startDate;
 
-    private String endDate;
+    private Date endDate;
 
     private double price;
 
-    public PriceResponse(int bookingId, String hotelId, String customerName, String startDate, String endDate, double price) {
-        BookingId = bookingId;
+    public PriceResponse(String hotelId, Date startDate, Date endDate, double price) {
         this.hotelId = hotelId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -21,15 +21,6 @@ public class PriceResponse {
     public PriceResponse() {
 
     }
-
-    public int getBookingId() {
-        return BookingId;
-    }
-
-    public void setBookingId(int bookingId) {
-        BookingId = bookingId;
-    }
-
     public String getHotelId() {
         return hotelId;
     }
@@ -38,19 +29,19 @@ public class PriceResponse {
         this.hotelId = hotelId;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

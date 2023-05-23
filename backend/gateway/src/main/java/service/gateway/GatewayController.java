@@ -29,6 +29,7 @@ public class GatewayController {
 
     @GetMapping("/services")
     public HashMap<String,String> getServices() {
+        services.put("price", "http://localhost:8081/price");
         return services;
     }
 
@@ -43,7 +44,9 @@ public class GatewayController {
         }
         return response;
     }
+
     private ResponseEntity<PriceResponse[]> getPrice(String url, BookingForm request) {
+        System.out.println(request.location);
         RestTemplate template = new RestTemplate();
         ResponseEntity<PriceResponse[]> response = template.postForEntity(url, request, PriceResponse[].class);
         if (response.getStatusCode().equals(HttpStatus.OK)) {
@@ -90,7 +93,7 @@ public class GatewayController {
         for (HotelDescription description : descriptions) {
             PriceResponse l_price = price_map.get(description.getId());
             Rating l_raiting = rating_list.get(description.getId());
-            hotel_list.add(new Hotel(description.getId(),l_price.getPrice(), l_raiting, description));
+            hotel_list.add(new Hotel(description.getId(),l_price, l_raiting, description));
         }
         Hotel[] hotelArray = hotel_list.toArray(new Hotel[hotel_list.size()]);
         return ResponseEntity.status(HttpStatus.OK).body(hotelArray);

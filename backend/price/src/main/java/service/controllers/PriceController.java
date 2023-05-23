@@ -6,12 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.*;
-import service.core.Booking;
+import service.Booking;
+import service.core.BookingForm;
 import service.core.PriceResponse;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class PriceController {
@@ -19,7 +22,7 @@ public class PriceController {
     BookingRepository bookings;
 
     @Autowired
-    PriceResponseRepository prices;
+    HotelPriceRepository prices;
     private PriceService service = new PriceService();
 
     @Value("${server.port}")
@@ -42,16 +45,23 @@ public class PriceController {
         return ResponseEntity.status(HttpStatus.OK).body(booking);
     }
     
-    @GetMapping(value="/price/{price}/{startDate}/{endDate}/{guests}", produces={"application/json"})
-    public ResponseEntity<Double> calculatePrice(@PathVariable double price,
-    												@PathVariable String startDate,
-    												@PathVariable String endDate,
-    												@PathVariable int guests) {
-    	double fullPrice = service.computePrice(new BookingDetails(startDate, endDate, price, guests));
-    	return ResponseEntity.status(HttpStatus.OK).body(fullPrice);
+    @PostMapping(value="/price", consumes={"application/json"})
+    public ResponseEntity<PriceResponse[]> calculatePrice(@RequestBody BookingForm bookingForm) {
+        List<HotelPrice> hotelPrices = prices.findPricesByLocation(bookingForm.location);
+        List<PriceResponse> responseList = new ArrayList<>();
+
+        for(HotelPrice hp : hotelPrices) {
+                System.out.println(hp.hotelId);
+               responseList.add(new PriceResponse(hp.hotelId, bookingForm.startDate, bookingForm.endDate, service.computePrice(bookingForm, hp.pricePerPersonPerNight)));
+        }
+
+        PriceResponse[] responses = new PriceResponse[responseList.size()];
+        responseList.toArray(responses);
+
+    	return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
-    @PostMapping(value="/bookings", consumes="application/json")
+    /*@PostMapping(value="/bookings", consumes="application/json")
     public ResponseEntity<Booking> book(
             @RequestBody BookingForm bookingForm) {
         double fullPrice = 20;
@@ -66,16 +76,16 @@ public class PriceController {
                 .header("Location", url)
                 .header("Content-Location", url)
                 .body(booking);
-    }
+    }*/
 
-    @PostMapping(value="/price", consumes="application/json")
-    public ResponseEntity<PriceResponse> makePrice(
-            @RequestBody PriceResponse priceResponse) {
-        prices.insert(priceResponse);
+    @PostMapping(value="/addprice", consumes="application/json")
+    public ResponseEntity<HotelPrice> makePrice(
+            @RequestBody HotelPrice hotelPrice) {
+        prices.insert(hotelPrice);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(priceResponse);
+                .body(hotelPrice);
     }
 
     private String getHost() {
