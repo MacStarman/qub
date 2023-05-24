@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import service.*;
 import service.Booking;
 import service.core.BookingForm;
+import service.core.HotelPrice;
 import service.core.PriceResponse;
 
 import java.net.InetAddress;

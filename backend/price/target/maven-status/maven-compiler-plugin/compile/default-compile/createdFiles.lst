@@ -4,4 +4,3 @@ service\controllers\PriceController.class
 service\Application.class
 service\HotelPriceRepository.class
 service\BookingRepository.class
-service\HotelPrice.class
