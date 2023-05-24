@@ -131,7 +131,7 @@ public class GatewayController {
         return null;
     }
 
-    private ResponseEntity<HotelPrice> getPrice(@RequestParam String priceServiceUrl, @RequestParam String id) {
+    private ResponseEntity<HotelPrice> getPrice(String priceServiceUrl, String id) {
         RestTemplate template = new RestTemplate();
         ResponseEntity<HotelPrice> response = template.getForEntity(priceServiceUrl + "/" + id, HotelPrice.class);
         return response;
