@@ -131,8 +131,10 @@ public class GatewayController {
         return null;
     }
 
-    private ResponseEntity<PriceResponse> getPrice(String priceServieUrl, String id) {
-        return null;
+    private ResponseEntity<HotelPrice> getPrice(@RequestParam String priceServiceUrl, @RequestParam String id) {
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<HotelPrice> response = template.getForEntity(priceServiceUrl + "/" + id, HotelPrice.class);
+        return response;
     }
 
 //    @GetMapping(value = "/applications/{id}", produces = "application/json")
