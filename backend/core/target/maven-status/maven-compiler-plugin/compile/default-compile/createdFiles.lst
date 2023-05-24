@@ -2,6 +2,7 @@ service\core\HotelDescription.class
 service\core\Rating.class
 service\core\BookingForm.class
 service\core\Review.class
+service\core\HotelPrice.class
 service\core\PriceResponse.class
 service\core\HotelDetails.class
 service\core\Hotel.class

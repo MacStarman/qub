@@ -116,7 +116,7 @@ public class GatewayController {
         String description_servie_url = getServices().get("descriptions");
         ResponseEntity<HotelDescription> description_response = getHotelDescription(description_servie_url, id);
         String price_servie_url = getServices().get("price");
-        ResponseEntity<PriceResponse> price_response = getPrice(price_servie_url, id);
+        ResponseEntity<HotelPrice> price_response = getPrice(price_servie_url, id);
         String rating_servie_url = getServices().get("rating");
         ResponseEntity<Rating> raiting_response = getRating(rating_servie_url, id);
         HotelDetails details = new HotelDetails(raiting_response.getBody(), description_response.getBody(), price_response.getBody());
