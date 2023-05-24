@@ -70,7 +70,7 @@ public class PriceController {
                 .body(response);
     }
 
-    /*@PostMapping(value="/bookings", consumes="application/json")
+    @PostMapping(value="/bookings", consumes="application/json")
     public ResponseEntity<Booking> book(
             @RequestBody BookingForm bookingForm) {
         double fullPrice = 20;
@@ -85,7 +85,7 @@ public class PriceController {
                 .header("Location", url)
                 .header("Content-Location", url)
                 .body(booking);
-    }*/
+    }
 
     @PostMapping(value="/addprice", consumes="application/json")
     public ResponseEntity<HotelPrice> makePrice(
