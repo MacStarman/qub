@@ -61,6 +61,14 @@ public class PriceController {
     	return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
+    @GetMapping(value="/price/{id}")
+    public ResponseEntity<HotelPrice> getPrice(@PathVariable String id) {
+        HotelPrice response = prices.findHotelPriceById(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
     /*@PostMapping(value="/bookings", consumes="application/json")
     public ResponseEntity<Booking> book(
             @RequestBody BookingForm bookingForm) {
