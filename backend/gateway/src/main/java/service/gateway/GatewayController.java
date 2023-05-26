@@ -135,7 +135,7 @@ public class GatewayController {
 
     private ResponseEntity<HotelPrice> getPrice(String priceServieUrl, String id) {
         RestTemplate template = new RestTemplate();
-        ResponseEntity<HotelPrice> response = template.getForEntity(priceServiceUrl + "/" + id, HotelPrice.class);
+        ResponseEntity<HotelPrice> response = template.getForEntity(priceServieUrl + "/" + id, HotelPrice.class);
 
         if (response.getStatusCode().equals(HttpStatus.OK)) {
             System.out.println(Objects.requireNonNull(response.getBody()));
