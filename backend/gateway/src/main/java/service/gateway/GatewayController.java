@@ -131,7 +131,7 @@ public class GatewayController {
 
     private ResponseEntity<Rating> getRating(String ratingServieUrl, String id) {
         RestTemplate template = new RestTemplate();
-        ResponseEntity<Rating> response = template.getForEntity("http://qub-ratings-1:8080/ratings/"+id, Rating.class);
+        ResponseEntity<Rating> response = template.getForEntity(ratingServieUrl+id, Rating.class);
         if (response.getStatusCode().equals(HttpStatus.OK)) {
             System.out.println(Objects.requireNonNull(response.getBody()));
         }
@@ -142,7 +142,17 @@ public class GatewayController {
     }
 
     private ResponseEntity<HotelPrice> getPrice(String priceServieUrl, String id) {
-        return null;
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<HotelPrice> response = template.getForEntity(priceServieUrl + "/" + id, HotelPrice.class);
+
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            System.out.println(Objects.requireNonNull(response.getBody()));
+        }
+        if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)){
+            System.out.println("no rating found");
+        }
+
+        return response;
     }
 
 //    @GetMapping(value = "/applications/{id}", produces = "application/json")
