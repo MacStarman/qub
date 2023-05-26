@@ -30,9 +30,9 @@ public class GatewayController {
     @GetMapping("/services")
     public HashMap<String,String> getServices() {
 
-        services.put("price", "http://qub-price-1:8081/price");
-        services.put("ratings", "http://qub-ratings-1:8080/ratings");
-        services.put("descriptions", "http://qub-descriptions-1:8083/descriptions");
+        services.put("price", "http://qub-price-1:8081/price/");
+        services.put("ratings", "http://qub-ratings-1:8080/ratings/");
+        services.put("descriptions", "http://qub-descriptions-1:8083/descriptions/");
         return services;
     }
 
@@ -114,6 +114,17 @@ public class GatewayController {
         String rating_servie_url = getServices().get("ratings");
         ResponseEntity<Rating> raiting_response = getRating(rating_servie_url, id);
         HotelDetails details = new HotelDetails(raiting_response.getBody(), description_response.getBody(), price_response.getBody());
+        System.out.println("DESCIPTION DEBUG");
+        System.out.println(description_response.getBody().getHotelLink());
+        System.out.println("RATINGS DEBUG");
+        System.out.println(raiting_response.getBody().getStars());
+        System.out.println("PRICE DEBUG");
+        // I THINK what's wrong is that the price response needs a GETTER instead of trying to access results directly..?
+        // ERROR we get is "No converter found for return value of type: class service.core.HotelDetails"
+        // (https://stackoverflow.com/questions/37841373/java-lang-illegalargumentexception-no-converter-found-for-return-value-of-type)
+        System.out.println(price_response.getBody().pricePerPersonPerNight);
+
+
         return ResponseEntity.ok().body(details);
     }
 
