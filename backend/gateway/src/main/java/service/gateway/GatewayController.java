@@ -134,7 +134,17 @@ public class GatewayController {
     }
 
     private ResponseEntity<HotelPrice> getPrice(String priceServieUrl, String id) {
-        return null;
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<HotelPrice> response = template.getForEntity(priceServiceUrl + "/" + id, HotelPrice.class);
+
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            System.out.println(Objects.requireNonNull(response.getBody()));
+        }
+        if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)){
+            System.out.println("no rating found");
+        }
+
+        return response;
     }
 
 //    @GetMapping(value = "/applications/{id}", produces = "application/json")
