@@ -118,8 +118,16 @@ public class GatewayController {
     }
 
     private ResponseEntity<HotelDescription> getHotelDescription(String descriptionServieUrl, String id) {
-        return null;
-    }
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<HotelDescription> response = template.getForEntity("http://qub-descriptions-1:8083/descriptions/"+id, HotelDescription.class);
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            System.out.println(Objects.requireNonNull(response.getBody()));
+        }
+        if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)){
+            System.out.println("no description found");
+        }
+        return response;
+    }    
 
     private ResponseEntity<Rating> getRating(String ratingServieUrl, String id) {
         RestTemplate template = new RestTemplate();
