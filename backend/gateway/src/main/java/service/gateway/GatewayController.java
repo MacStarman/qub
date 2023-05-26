@@ -38,7 +38,6 @@ public class GatewayController {
 
     private ResponseEntity<HotelDescription[]> getHotelDescription(String url, BookingForm request) {
         RestTemplate template = new RestTemplate();
-        System.out.println("!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
         ResponseEntity<HotelDescription[]> response = template.getForEntity(url, HotelDescription[].class);
         if (response.getStatusCode().equals(HttpStatus.OK)) {
             System.out.println(Objects.requireNonNull(response.getBody()).length + " hotels found");
@@ -63,7 +62,7 @@ public class GatewayController {
     }
     private ResponseEntity<Rating[]> getRating(String url, BookingForm request) {
         RestTemplate template = new RestTemplate();
-        ResponseEntity<Rating[]> response = template.postForEntity(url, request, Rating[].class);
+        ResponseEntity<Rating[]> response = template.getForEntity(url, Rating[].class);
         if (response.getStatusCode().equals(HttpStatus.OK)) {
             System.out.println(Objects.requireNonNull(response.getBody()).length + " raitings found");
         }
@@ -75,8 +74,8 @@ public class GatewayController {
 
     @PostMapping(value ="/hotels", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Hotel[]> getHotels(@RequestBody BookingForm request){
-        //String rating_servie_url = getServices().get("ratings");
-        //ResponseEntity<Rating[]> raiting_response = getRating(rating_servie_url, request);
+        String rating_servie_url = getServices().get("ratings");
+        ResponseEntity<Rating[]> raiting_response = getRating(rating_servie_url, request);
         String description_servie_url = getServices().get("descriptions");
         ResponseEntity<HotelDescription[]> description_response = getHotelDescription(description_servie_url, request);
         String price_servie_url = getServices().get("price");
@@ -91,13 +90,12 @@ public class GatewayController {
             price_map.put(item.getHotelId(),item);
         }
         assert descriptions != null;
-        //for (Rating item: Objects.requireNonNull(raiting_response.getBody())) {
-        //    rating_list.put(item.getId(),item);
-        //}
+        for (Rating item: Objects.requireNonNull(raiting_response.getBody())) {
+            rating_list.put(item.getId(),item);
+        }
         for (HotelDescription description : descriptions) {
             PriceResponse l_price = price_map.get(description.getId());
-            //Rating l_raiting = rating_list.get(description.getId());
-            Rating l_raiting = null;
+            Rating l_raiting = rating_list.get(description.getId());
             hotel_list.add(new Hotel(description.getId(),l_price, l_raiting, description));
         }
         Hotel[] hotelArray = hotel_list.toArray(new Hotel[hotel_list.size()]);
@@ -115,8 +113,7 @@ public class GatewayController {
         ResponseEntity<HotelPrice> price_response = getPrice(price_servie_url, id);
         String rating_servie_url = getServices().get("ratings");
         ResponseEntity<Rating> raiting_response = getRating(rating_servie_url, id);
-        Rating testRating = null;
-        HotelDetails details = new HotelDetails(testRating, description_response.getBody(), price_response.getBody());
+        HotelDetails details = new HotelDetails(raiting_response.getBody(), description_response.getBody(), price_response.getBody());
         return ResponseEntity.ok().body(details);
     }
 
@@ -125,7 +122,15 @@ public class GatewayController {
     }
 
     private ResponseEntity<Rating> getRating(String ratingServieUrl, String id) {
-        return null;
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<Rating> response = template.getForEntity("http://qub-ratings-1:8080/ratings/"+id, Rating.class);
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            System.out.println(Objects.requireNonNull(response.getBody()));
+        }
+        if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)){
+            System.out.println("no rating found");
+        }
+        return response;
     }
 
     private ResponseEntity<HotelPrice> getPrice(String priceServieUrl, String id) {

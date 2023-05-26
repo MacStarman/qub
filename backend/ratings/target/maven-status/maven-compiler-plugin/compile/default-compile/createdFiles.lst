@@ -1,5 +1,3 @@
 service\controllers\RatingController.class
-service\ratings\Rating.class
 service\ratings\RatingRepository.class
 service\Application.class
-service\ratings\Review.class

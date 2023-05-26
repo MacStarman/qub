@@ -14,23 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import service.ratings.Rating;
+import service.core.Rating;
 import service.ratings.RatingRepository;
-import service.ratings.Review;
+import service.core.Review;
 
 @RestController
 public class RatingController {
 
     @Autowired
     RatingRepository ratings;
-    
 
     @GetMapping(value = "/ratings", produces = "application/json")
-    public ResponseEntity<ArrayList<String>> getRatings() {
-        ArrayList<String> list = new ArrayList<>();
+    public ResponseEntity<ArrayList<Rating>> getRatings() {
+        ArrayList<Rating> list = new ArrayList<>();
         for (Rating rating : ratings.findAll()) {
-            list.add("http:" + getHost()
-                    + "/ratings/" + rating.getId());
+            list.add(raiting);
         }
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
