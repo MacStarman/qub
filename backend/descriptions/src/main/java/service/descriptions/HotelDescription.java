@@ -31,7 +31,7 @@ public class HotelDescription implements Serializable  {
     @ElementCollection
     private List<String> images = new ArrayList<String>();;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, length = 30)
     private String hotelLocation;
 
     @Column(nullable = false, unique = true, length = 100)
