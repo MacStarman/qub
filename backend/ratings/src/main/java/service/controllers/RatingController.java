@@ -28,7 +28,7 @@ public class RatingController {
     public ResponseEntity<ArrayList<Rating>> getRatings() {
         ArrayList<Rating> list = new ArrayList<>();
         for (Rating rating : ratings.findAll()) {
-            list.add(raiting);
+            list.add(rating);
         }
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }

@@ -104,13 +104,16 @@ public class GatewayController {
 
 
 
-    @PostMapping("/hotel/{id}/details")
-    public ResponseEntity<HotelDetails> getDetails(@PathVariable String id) {
+    @PostMapping(value = "/hotel/{id}/details",  consumes = "application/json", produces = "application/json")
+    public ResponseEntity<HotelDetails> getDetails(@PathVariable("id") String id) {
+
+        String price_servie_url = getServices().get("price");
+        ResponseEntity<HotelPrice> price_response = getPrice(price_servie_url, id);
 
         String description_servie_url = getServices().get("descriptions");
         ResponseEntity<HotelDescription> description_response = getHotelDescription(description_servie_url, id);
-        String price_servie_url = getServices().get("price");
-        ResponseEntity<HotelPrice> price_response = getPrice(price_servie_url, id);
+
+
         String rating_servie_url = getServices().get("ratings");
         ResponseEntity<Rating> raiting_response = getRating(rating_servie_url, id);
         HotelDetails details = new HotelDetails(raiting_response.getBody(), description_response.getBody(), price_response.getBody());
@@ -122,15 +125,15 @@ public class GatewayController {
         // I THINK what's wrong is that the price response needs a GETTER instead of trying to access results directly..?
         // ERROR we get is "No converter found for return value of type: class service.core.HotelDetails"
         // (https://stackoverflow.com/questions/37841373/java-lang-illegalargumentexception-no-converter-found-for-return-value-of-type)
-        System.out.println(price_response.getBody().pricePerPersonPerNight);
+        System.out.println(price_response.getBody().getPricePerPersonPerNight());
 
-
-        return ResponseEntity.ok().body(details);
+        return new ResponseEntity<HotelDetails>(details, HttpStatus.OK);
+      //  return ResponseEntity.ok().body(details);
     }
 
     private ResponseEntity<HotelDescription> getHotelDescription(String descriptionServieUrl, String id) {
         RestTemplate template = new RestTemplate();
-        ResponseEntity<HotelDescription> response = template.getForEntity("http://qub-descriptions-1:8083/descriptions/"+id, HotelDescription.class);
+        ResponseEntity<HotelDescription> response = template.getForEntity("http://qub-descriptions-1:8083/descriptions/ "+id, HotelDescription.class);
         if (response.getStatusCode().equals(HttpStatus.OK)) {
             System.out.println(Objects.requireNonNull(response.getBody()));
         }

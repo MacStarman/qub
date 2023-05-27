@@ -10,6 +10,10 @@
         <module>core</module>
         <module>gateway</module>
         <module>price</module>
+        <module>ratings</module>
+        <module>descriptions</module>
+
+
     </modules>
     <build>
 

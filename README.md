@@ -17,9 +17,12 @@ Our application is a hotel application like AirBnB or Booking.com. The user shou
 Docker
 
 # Compiling and running code
-1. Inside backend/gateway run ```mvn package```
-2. Inside backend/price run ```mvn package```
-3. Run ```docker compose up --build```
+1. Clone the repository. 
+   ```sh
+   git clone https://gitlab.com/ucd-cs-rem/comp30220-2023/qub.git
+   ```
+2. Inside the backend folder run ```mvn package```
+3. Inside the project's root directory run ```docker compose up --build```
 4. Frontend will be available at http://localhost:80
 
 # Report
