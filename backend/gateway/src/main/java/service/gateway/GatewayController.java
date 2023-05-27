@@ -102,8 +102,6 @@ public class GatewayController {
         return ResponseEntity.status(HttpStatus.OK).body(hotelArray);
     }
 
-
-
     @PostMapping(value = "/hotel/{id}/details",  consumes = "application/json", produces = "application/json")
     public ResponseEntity<HotelDetails> getDetails(@PathVariable("id") String id) {
 
@@ -113,7 +111,6 @@ public class GatewayController {
         String description_servie_url = getServices().get("descriptions");
         ResponseEntity<HotelDescription> description_response = getHotelDescription(description_servie_url, id);
 
-
         String rating_servie_url = getServices().get("ratings");
         ResponseEntity<Rating> raiting_response = getRating(rating_servie_url, id);
         HotelDetails details = new HotelDetails(raiting_response.getBody(), description_response.getBody(), price_response.getBody());
@@ -122,13 +119,9 @@ public class GatewayController {
         System.out.println("RATINGS DEBUG");
         System.out.println(raiting_response.getBody().getStars());
         System.out.println("PRICE DEBUG");
-        // I THINK what's wrong is that the price response needs a GETTER instead of trying to access results directly..?
-        // ERROR we get is "No converter found for return value of type: class service.core.HotelDetails"
-        // (https://stackoverflow.com/questions/37841373/java-lang-illegalargumentexception-no-converter-found-for-return-value-of-type)
         System.out.println(price_response.getBody().getPricePerPersonPerNight());
 
         return new ResponseEntity<HotelDetails>(details, HttpStatus.OK);
-      //  return ResponseEntity.ok().body(details);
     }
 
     private ResponseEntity<HotelDescription> getHotelDescription(String descriptionServieUrl, String id) {
