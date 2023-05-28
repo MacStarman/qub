@@ -26,7 +26,6 @@ Docker
 4. Frontend will be available at http://localhost:80
 
 # Report
-A link to the report (which should be uploaded in the root folder of your project)
-
+https://gitlab.com/ucd-cs-rem/comp30220-2023/qub/-/blob/main/System_Documentation.pdf
 # Video
 Available at: https://gitlab.com/ucd-cs-rem/comp30220-2023/qub/-/blob/main/Qube_final_video_final.mp4
