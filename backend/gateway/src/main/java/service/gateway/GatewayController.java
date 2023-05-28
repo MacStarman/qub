@@ -30,7 +30,7 @@ public class GatewayController {
     @GetMapping("/services")
     public HashMap<String,String> getServices() {
 
-        services.put("price", "http://qub-price-1:8081/price/");
+        services.put("price", "http://qub-price-1:8081/price");
         services.put("ratings", "http://qub-ratings-1:8080/ratings/");
         services.put("descriptions", "http://qub-descriptions-1:8083/descriptions/");
         return services;
