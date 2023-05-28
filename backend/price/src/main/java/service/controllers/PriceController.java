@@ -20,30 +20,17 @@ import java.util.List;
 @RestController
 public class PriceController {
     @Autowired
-    BookingRepository bookings;
-
-    @Autowired
     HotelPriceRepository prices;
     private PriceService service = new PriceService();
 
     @Value("${server.port}")
     private int port;
 
-    @GetMapping(value="/bookings", produces="application/json")
-    public ResponseEntity<Collection<Booking>> seeBookings() {
+    @GetMapping(value="/price", produces="application/json")
+    public ResponseEntity<Collection<HotelPrice>> seePrices() {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(bookings.findAll());
-    }
-
-    @GetMapping(value="/bookings/{id}", produces={"application/json"})
-    public ResponseEntity<Booking> getBooking(@PathVariable String id) {
-        Booking booking = bookings.findBookingById(id);
-        if(booking == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(booking);
+                .body(prices.findAll());
     }
     
     @PostMapping(value="/price", consumes={"application/json"})
@@ -69,23 +56,6 @@ public class PriceController {
                 .status(HttpStatus.OK)
                 .body(response);
     }
-
-    /*@PostMapping(value="/bookings", consumes="application/json")
-    public ResponseEntity<Booking> book(
-            @RequestBody BookingForm bookingForm) {
-        double fullPrice = 20;
-        Booking booking = new Booking(bookings.count(), bookingForm.hotelId, bookingForm.customerName, bookingForm.startDate, bookingForm.endDate, fullPrice);
-        bookings.insert(booking);
-
-        String url = "http://" + getHost() + "/quotation/"
-                + booking.hotelId;
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .header("Location", url)
-                .header("Content-Location", url)
-                .body(booking);
-    }*/
 
     @PostMapping(value="/addprice", consumes="application/json")
     public ResponseEntity<HotelPrice> makePrice(
